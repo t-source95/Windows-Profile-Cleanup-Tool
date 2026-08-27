@@ -4,7 +4,7 @@
 
 ## Why this exists
 
-This is the companion tool to the [Profile Rebuild Tool](../profile-rebuild-tool/README.md): that tool fixes one corrupted profile in place, while this one removes leftover profiles entirely from a device that's accumulated them over time — shared workstations, kiosks, loaner laptops, or machines reassigned between employees without a clean reimage in between.
+This is the companion tool to the [Profile Rebuild Tool](https://github.com/t-source95/Windows-Profile-Rebuild-Tool): that tool fixes one corrupted profile in place, while this one removes leftover profiles entirely from a device that's accumulated them over time — shared workstations, kiosks, loaner laptops, or machines reassigned between employees without a clean reimage in between.
 
 The built-in way to do this is Windows' own Advanced System Settings → User Profiles dialog. The problem is that before it can even show you the list, it recursively walks every profile folder on disk to calculate a Size column — which on a device with several leftover profiles (or a couple of large ones) can make the dialog sit there looking frozen for a noticeable stretch. That's not a fault with the machine; it's just how that dialog is built. This tool reads the same underlying profile data (`Win32_UserProfile`) but skips the up-front size scan, so the list loads instantly, and deletion runs through the same call the native dialog's Delete button uses under the hood — so it isn't a more aggressive way to delete a profile, just a faster path to the same action, with some safety guardrails layered on top.
 
